@@ -162,6 +162,12 @@ class WhiptailJS {
         }
     };
 
+    const exitModal = () => {
+        if(this.config.onClose) {
+            return this.config.onClose();
+        }
+    };
+
     // Desktop support (arrow keys, enter/escape for selection)
     const keydownHandler = (event) => {
         if (event.key === 'ArrowUp') {

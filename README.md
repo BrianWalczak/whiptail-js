@@ -78,6 +78,8 @@ const whiptail = new WhiptailJS({
   - The selected item DOM element.
   - The selected footer button DOM element.
 
+- **`onClose`** | *(function, optional)* Callback called when a user closes the dialog via the Escape key.
+
 
 ### API Methods
 
@@ -92,3 +94,5 @@ const whiptail = new WhiptailJS({
 - **`destroy()`** | Destroys the dialog from the DOM and cleans up all event listeners.
 
 - **`onSelect(item, footerButton)`** | Callback triggered when a user makes a selection. Receives the selected item and footer button elements.
+
+- **`onClose()`** | Callback triggered when a user closes the dialog (via Escape key).
