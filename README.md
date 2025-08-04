@@ -39,7 +39,8 @@ const whiptail = new WhiptailJS({
         { label: "8 About raspi-config&nbsp;&nbsp;&nbsp;&nbsp;Information about this configuration tool" }
     ],
     footer: [{ label: "&lt;Select&gt;", id: 'select' }, { label: "&lt;Finish&gt;", id: 'close' }],
-    id: "whiptail-container",
+    selector: "#whiptail-container",
+    focus: true,
     onSelect: (item, btn) => {
         if(btn.id === 'close') {
             whiptail.destroy(); // destroy the instance
@@ -58,7 +59,9 @@ const whiptail = new WhiptailJS({
 
 - **`title`** | *(string)* The dialog's header text.
 
-- **`id`** | *(string)* The HTML id of the container element where the dialog will render.
+- **`selector`** | *(string)* The CSS selector of the container element where the dialog will render.
+
+- **`focus`** | *(boolean, optional)* Whether the dialog should automatically receive focus when created.
 
 - **`text`** | *(string, optional)* Additional text content to display in the dialog.
 
@@ -81,6 +84,8 @@ const whiptail = new WhiptailJS({
 - **`constructor(config)`** | Creates a new whiptail dialog instance with the provided configuration options.
 
 - **`get()`** | Returns the DOM element of the dialog container.
+
+- **`focus()`** | Sets focus to the dialog, used to ensure keyboard navigation works properly.
 
 - **`status()`** | Returns an object with `item` and `footer` properties containing the currently focused menu item and footer button element.
 

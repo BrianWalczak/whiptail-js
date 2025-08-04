@@ -19,6 +19,7 @@
     padding: 10px;
     box-sizing: border-box;
     position: relative;
+    outline: none;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;

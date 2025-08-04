@@ -19,10 +19,21 @@ class WhiptailJS {
 
     this._render();
     this._bindEvents();
+
+    if(config.focus) {
+        this.focus();
+    }
   }
 
   get() {
     return this.$container;
+  }
+
+  focus() {
+    if (this.$container) {
+        this.$container.attr('tabindex', '-1');
+        this.$container.focus();
+    }
   }
 
   status() {
@@ -38,9 +49,9 @@ class WhiptailJS {
   }
 
   _render() {
-    this.$container = $(`#${this.config.id}`);
+    this.$container = $(this.config.selector);
     if (this.$container.length === 0) {
-      throw new Error(`WhiptailJS: An error occurred, item with id ${this.config.id} not found.`);
+      throw new Error(`WhiptailJS: An error occurred, item with selector ${this.config.selector} not found.`);
     }
 
     this.$container.empty();
@@ -56,6 +67,8 @@ class WhiptailJS {
     const items = $('<div class="items"></div>');
     if(this.config.text) {
         const $text = $(`<p></p>`);
+        $text.css('margin-top', '0');
+        $text.css('margin-bottom', '1em');
         $text.html(this.config.text);
         items.append($text);
     }
