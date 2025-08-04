@@ -38,7 +38,7 @@ const whiptail = new WhiptailJS({
         { label: "7 Update&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update this tool to the latest version" },
         { label: "8 About raspi-config&nbsp;&nbsp;&nbsp;&nbsp;Information about this configuration tool" }
     ],
-    footerButtons: [{ label: "<Select>", id: 'select' }, { label: "<Finish>", id: 'close' }],
+    footer: [{ label: "&lt;Select&gt;", id: 'select' }, { label: "&lt;Finish&gt;", id: 'close' }],
     id: "whiptail-container",
     onSelect: (item, btn) => {
         if(btn.id === 'close') {
@@ -60,14 +60,16 @@ const whiptail = new WhiptailJS({
 
 - **`id`** | *(string)* The HTML id of the container element where the dialog will render.
 
-- **`items`** | *(array of objects)* List of menu items, each with the following:
+- **`text`** | *(string, optional)* Additional text content to display in the dialog.
+
+- **`items`** | *(array of objects, optional)* List of menu items, each with the following:
   - `label` *(string)* | The text content of the item.
   - `id` *(string, optional)* | The HTML id attribute for the item.
   - `class` *(string, optional)* | The HTML class attribute for the item.
   - `focus` *(boolean, optional)* | Whether this item is initially focused.
   - `active` *(boolean, optional)* | Whether this item is initially active (selected).
 
-- **`footerButtons`** | *(array of objects)* List of footer buttons, each with the same properties as `items`.
+- **`footer`** | *(array of objects)* List of footer buttons, each with the same properties as `items`.
 
 - **`onSelect`** | *(function)* Callback called when a user selects an item or footer button. Receives two arguments:
   - The selected item DOM element.

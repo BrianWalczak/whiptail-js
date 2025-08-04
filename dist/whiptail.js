@@ -37,15 +37,6 @@ class WhiptailJS {
     this.$container.remove();
   }
 
-  _escapeHTML(str) {
-    return str
-    .replace(/&(?!(nbsp|lt|gt|amp|quot|apos|#\d+);)/g, "&amp;") // Don't escape existing entities
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-  }
-
   _render() {
     this.$container = $(`#${this.config.id}`);
     if (this.$container.length === 0) {
@@ -56,33 +47,41 @@ class WhiptailJS {
     this.$container.addClass('whiptail-js container');
     
     const header = $('<div class="header"><p></p></div>');
-    header.find('p').html(this._escapeHTML(this.config.title));
+    header.find('p').html(this.config.title);
     this.$container.append(header);
 
     const content = $('<div class="content"></div>');
     this.$container.append(content);
 
     const items = $('<div class="items"></div>');
-    this.config.items.forEach((item) => {
-      const $item = $(`<div class="item"></div>`);
-      if(item.focus) $item.addClass('focus');
-      if(item.active) $item.addClass('active');
-      if(item.id) $item.attr('id', item.id);
-      if(item.class) $item.addClass(item.class);
+    if(this.config.text) {
+        const $text = $(`<p></p>`);
+        $text.html(this.config.text);
+        items.append($text);
+    }
 
-      $item.html(this._escapeHTML(item.label));
-      items.append($item);
-    });
+    if(this.config.items) {
+        this.config.items.forEach((item) => {
+            const $item = $(`<div class="item"></div>`);
+            if(item.focus) $item.addClass('focus');
+            if(item.active) $item.addClass('active');
+            if(item.id) $item.attr('id', item.id);
+            if(item.class) $item.addClass(item.class);
+
+            $item.html(item.label);
+            items.append($item);
+        });
+    }
 
     const footer = $('<div class="footer"></div>');
-    this.config.footerButtons.forEach((button) => {
+    this.config.footer.forEach((button) => {
       const $button = $(`<div class="item"></div>`);
       if(button.focus) $button.addClass('focus');
       if(button.active) $button.addClass('active');
       if(button.id) $button.attr('id', button.id);
       if(button.class) $button.addClass(button.class);
 
-      $button.html(this._escapeHTML(button.label));
+      $button.html(button.label);
       footer.append($button);
     });
 
@@ -119,6 +118,9 @@ class WhiptailJS {
     }
 
     function enterFooter() {
+        // Don't enter footer if there are no footer items
+        if ($footerItems.length === 0) return;
+
         // Remove focus class, make active (blue color)
         $items.eq(itemIndex).removeClass('focus').addClass('active');
 
@@ -130,6 +132,9 @@ class WhiptailJS {
     }
 
     function exitFooter() {
+        // Don't exit footer if there are no items to go back to
+        if ($items.length === 0) return;
+
         // Remove active class, make focus (red color, in the selection mode)
         $items.eq(itemIndex).removeClass('active').addClass('focus');
 
