@@ -1,0 +1,19 @@
+{
+  "name": "whiptail-js",
+  "version": "1.0.0",
+  "description": "A lightweight terminal-style dialog library for the web, inspired by the whiptail tool.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrianWalczak/whiptail-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BrianWalczak/whiptail-js/issues"
+  },
+  "homepage": "https://github.com/BrianWalczak/whiptail-js#readme",
+  "main": "dist/whiptail.js",
+  "style": "dist/whiptail.css",
+  "files": ["dist", "README.md", "LICENSE"],
+  "keywords": ["whiptail", "dialog", "inquirer", "enquirer", "prompt", "terminal", "browser", "linux", "cli", "javascript", "web"],
+  "author": "Brian Walczak",
+  "license": "MIT"
+}

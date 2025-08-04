@@ -1,0 +1,99 @@
+/*!
+ * whiptail-js
+ * A lightweight terminal-style dialog library for the web
+ * 
+ * Copyright (c) 2025 Brian Walczak
+ * Author: Brian Walczak (https://github.com/BrianWalczak)
+ * Last Updated: 2025-08-03
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+.whiptail-js.container {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+
+    width: 800px;
+    height: 450px;
+    background: #b7b0b8;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.whiptail-js.container .content {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 2px solid #333;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.whiptail-js.container .header {
+    position: absolute;
+    background: #b7b0b8;
+    border-left: 2px solid #333;
+    border-right: 2px solid #333;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.whiptail-js.container .header p {
+    display: inline-block;
+    margin: 5px 10px;
+    margin-top: 2px;
+    color: red;
+    white-space: nowrap;
+}
+
+.whiptail-js.container .items {
+    position: absolute;
+    top: 50px;
+    bottom: 125px;
+    left: 80px;
+    right: 80px;
+}
+
+.whiptail-js.container .footer {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.whiptail-js.container .item {
+    font-family: 'Roboto Mono', monospace;
+    display: inline-block;
+    color: black;
+    padding: 0px;
+}
+
+.whiptail-js.container .items .item {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.whiptail-js.container .item.focus {
+    background-color: red;
+    color: white;
+}
+
+.whiptail-js.container .item.active {
+    background-color: #140eaa;
+    color: white;
+}
