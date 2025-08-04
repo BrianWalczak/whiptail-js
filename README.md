@@ -6,12 +6,14 @@
 
 ### Installation
 ```bash
+npm install jquery
 npm install whiptail-js
 ```
 
 Or use a CDN:
 ```html
 <link rel="stylesheet" href="https://unpkg.com/whiptail-js/dist/whiptail.css">
+<script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://unpkg.com/whiptail-js/dist/whiptail.js"></script>
 ```
 

@@ -146,9 +146,9 @@ class WhiptailJS {
 
     // Desktop support (arrow keys, enter/escape for selection)
     const keydownHandler = (event) => {
-        event.preventDefault();
-
         if (event.key === 'ArrowUp') {
+            event.preventDefault();
+
             if (!isFooter) {
                 setFocus(itemIndex - 1);
             } else if (footerIndex === 0) {
@@ -158,12 +158,16 @@ class WhiptailJS {
                 setFooterFocus(footerIndex - 1);
             }
         } else if (event.key === 'ArrowDown') {
+            event.preventDefault();
+
             if (!isFooter) {
                 setFocus(itemIndex + 1);
             } else {
                 setFooterFocus(footerIndex + 1);
             }
         } else if (event.key === 'ArrowLeft' && isFooter) {
+            event.preventDefault();
+
             if (footerIndex === 0) {
                 // Exit footer if at leftmost (back to main items)
                 exitFooter();
@@ -171,14 +175,20 @@ class WhiptailJS {
                 setFooterFocus(footerIndex - 1);
             }
         } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+
             if (!isFooter) {
                 enterFooter();
             } else {
                 setFooterFocus(footerIndex + 1);
             }
         } else if (((event.key === 'Enter' || event.key === ' ') && isFooter) || event.key === 'Enter' && !isFooter) {
+            event.preventDefault();
+
             selectItem($items.eq(itemIndex), $footerItems.eq(footerIndex));
         } else if (event.key === 'Escape') {
+            event.preventDefault();
+            
             exitModal();
         }
     };
