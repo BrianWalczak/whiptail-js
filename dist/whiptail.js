@@ -222,8 +222,8 @@ class WhiptailJS {
 
     // Mobile support (tap to select item)
     this.$container.find('.item').on('click', function () {
-        const isFooterItem = $(this).closest('.footer').length > 0;
-        const index = $(this).index();
+        const isFooterItem = $(this).parent().hasClass('footer');
+        const index = $(this).parent().children('.item').index(this);
 
         if (isFooterItem) {
             // Focus on item in footer (execute afterwards)
