@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>whiptail-js Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/whiptail-js/dist/whiptail.css">
+  <style>
+    body {
+      margin: 0px;
+      background: #140eaa;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="whiptail-container"></div>
+  <h1 style="display: none; color: white; font-family: sans-serif;">Window has been closed.</h1>
+
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/whiptail-js/dist/whiptail.js"></script>
+  <script>  
+  const whiptail = new WhiptailJS({
+      title: "Raspberry Pi Software Configuration Tool (raspi-config)",
+      items: [
+          { label: "1 System Options&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configure system settings", id: 'system', focus: true },
+          { label: "2 Display Options&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configure display settings", id: 'display' },
+          { label: "3 Interface Options&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configure connections to peripherals", id: 'interface' },
+          { label: "4 Performance Options&nbsp;&nbsp;&nbsp;Configure performance settings", id: 'performance' },
+          { label: "5 Localisation Options&nbsp;&nbsp;Configure language and regional settings", id: 'localisation' },
+          { label: "6 Advanced Options&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configure advanced settings", id: 'advanced' },
+          { label: "7 Update&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update this tool to the latest version", id: 'update' },
+          { label: "8 About raspi-config&nbsp;&nbsp;&nbsp;&nbsp;Information about this configuration tool", id: 'about' }
+      ],
+      footerButtons: [{ label: "<Select>", id: 'select' }, { label: "<Finish>", id: 'close' }],
+      id: "whiptail-container",
+      onSelect: (item, btn) => {
+          if(btn.id === 'close') {
+              whiptail.destroy(); // destroy the instance
+              $('h1').show();
+          } else if (btn.id === 'select') {
+              switch(item.id) {
+                  case 'system':
+                      alert("System Options selected");
+                      break;
+                  case 'display':
+                      alert("Display Options selected");
+                      break;
+                  case 'interface':
+                      alert("Interface Options selected");
+                      break;
+                  case 'performance':
+                      alert("Performance Options selected");
+                      break;
+                  case 'localisation':
+                      alert("Localisation Options selected");
+                      break;
+                  case 'advanced':
+                      alert("Advanced Options selected");
+                      break;
+                  case 'update':
+                      alert("Update selected");
+                      break;
+                  case 'about':
+                      alert("About raspi-config selected");
+                      break;
+              }
+          }
+      }
+  });
+</script>
+</body>
+</html>
