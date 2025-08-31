@@ -4,7 +4,7 @@
  * 
  * Copyright (c) 2025 Brian Walczak
  * Author: Brian Walczak (https://github.com/BrianWalczak)
- * Last Updated: 2025-08-03
+ * Last Updated: 2025-08-31
  */
 
 if (typeof window.jQuery === 'undefined') {
@@ -48,6 +48,10 @@ class WhiptailJS {
     this.$container.remove();
   }
 
+  return() {
+    this.config.onClose();
+  }
+
   _render() {
     this.$container = $(this.config.selector);
     if (this.$container.length === 0) {
@@ -56,10 +60,24 @@ class WhiptailJS {
 
     this.$container.empty();
     this.$container.addClass('whiptail-js container');
+
+    if(this.config?.width) {
+        const width = this.config.width.toString();
+
+        this.$container.css('width', (width.includes('%') || width.includes('px')) ? width : `${width}px`);
+    }
+
+    if(this.config?.height) {
+        const height = this.config.height.toString();
+
+        this.$container.css('height', (height.includes('%') || height.includes('px')) ? height : `${height}px`);
+    }
     
     const header = $('<div class="header"><p></p></div>');
-    header.find('p').html(this.config.title);
-    this.$container.append(header);
+    if(this.config?.title) {
+        header.find('p').html(this.config.title);
+        this.$container.append(header);
+    }
 
     const content = $('<div class="content"></div>');
     this.$container.append(content);

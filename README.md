@@ -57,9 +57,13 @@ const whiptail = new WhiptailJS({
 
 ### Configuration Options
 
-- **`title`** | *(string)* The dialog's header text.
+- **`title`** | *(string, optional)* The dialog's header text.
 
 - **`selector`** | *(string)* The CSS selector of the container element where the dialog will render.
+
+- **`height`** | *(string, optional)* The height of the dialog. Accepts values in pixels (e.g., `"400px"`) or percentages (e.g., `"60%"`).
+
+- **`width`** | *(string, optional)* The width of the dialog. Accepts values in pixels (e.g., `"600px"`) or percentages (e.g., `"80%"`).
 
 - **`focus`** | *(boolean, optional)* Whether the dialog should automatically receive focus when created.
 
@@ -92,6 +96,8 @@ const whiptail = new WhiptailJS({
 - **`status()`** | Returns an object with `item` and `footer` properties containing the currently focused menu item and footer button element.
 
 - **`destroy()`** | Destroys the dialog from the DOM and cleans up all event listeners.
+
+- **`return()`** | Calls the `onClose` callback, equivalent to pressing Escape key.
 
 - **`onSelect(item, footerButton)`** | Callback triggered when a user makes a selection. Receives the selected item and footer button elements.
 
