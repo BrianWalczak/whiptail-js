@@ -102,3 +102,65 @@ const whiptail = new WhiptailJS({
 - **`onSelect(item, footerButton)`** | Callback triggered when a user makes a selection. Receives the selected item and footer button elements.
 
 - **`onClose()`** | Callback triggered when a user closes the dialog (via Escape key).
+
+
+### Default Options
+
+`whiptail-js` provides a selection of convenience methods that mimic the Linux whiptail commands, allowing you to create standard dialogs quickly.
+
+#### Methods:
+
+`WhiptailJS.msgbox(selector, text, [height], [width], [callback], [config])`
+
+Displays a simple message box with an OK button.
+
+```js
+WhiptailJS.msgbox('#whiptail-container', 'Hello world!', 200, 400, () => {
+    console.log('OK pressed');
+});
+```
+
+`WhiptailJS.yesno(selector, text, [height], [width], [callback], [config])`
+
+Displays a [Yes / No] confirmation dialog.
+
+```js
+WhiptailJS.yesno('#whiptail-container', 'Do you want to continue?', 200, 400, (item, btn) => {
+    console.log(`${btn.id} pressed`);
+});
+```
+
+`WhiptailJS.infobox(selector, text, [height], [width], [callback], [config])`
+
+Displays a message box without any buttons; automatically calls the callback.
+
+```js
+WhiptailJS.infobox('#whiptail-container', 'Processing...', 200, 400, () => {
+    // do whatever before destroying
+});
+```
+
+`WhiptailJS.textbox(selector, fileUrl, [height], [width], [callback], [config])`
+
+Displays a file's content in a message box.
+
+```js
+WhiptailJS.msgbox('#whiptail-container', '/path/to/file.txt', 200, 400, () => {
+    console.log('OK pressed');
+});
+```
+**Tip:** This method also supports external URLs.
+
+`WhiptailJS.menu(selector, text, [height], [width], items, [callback], [config])`
+
+Displays a menu list with selectable items.
+
+```js
+WhiptailJS.menu('#whiptail-container', 'Choose an option:', 500, 800, [
+    { label: 'Option 1' },
+    { label: 'Option 2', focus: true },
+    { label: 'Option 3' }
+], (item, btn) => {
+    console.log(`Selected: ${item.textContent}`);
+});
+```

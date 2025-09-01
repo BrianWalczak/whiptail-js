@@ -1,6 +1,6 @@
 {
   "name": "whiptail-js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A lightweight terminal-style dialog library for the web, inspired by the whiptail tool.",
   "repository": {
     "type": "git",

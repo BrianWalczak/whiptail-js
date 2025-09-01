@@ -260,6 +260,173 @@ class WhiptailJS {
     $(document).off('keydown', this.keydownHandler);
     this.$container.find('.item').off('click');
   }
+
+  // -- Default Options -- //
+  static msgbox(selector, text, ...args) {
+    if(!selector || !text) throw new Error('Invalid arguments. Must provide a selector and text.');
+
+    let height = null; let width = null; let callback = null; let config = {};
+    for (let i = 0; i < args.length; i++) {
+        if (typeof args[i] === 'number') {
+            if (height === null) {
+                height = args[i];
+            } else {
+                width = args[i];
+            }
+        } else if (typeof args[i] === 'function') {
+            callback = args[i];
+        } else if (typeof args[i] === 'object') {
+            config = args[i];
+        }
+    }
+
+    return new WhiptailJS({
+      text: text,
+      height: height,
+      width: width,
+      selector: selector,
+      items: [],
+      footer: [
+        { label: '&lt;Ok&gt;', id: 'ok', focus: true }
+      ],
+      onSelect: callback,
+      onClose: callback,
+      ...config
+    });
+  }
+
+  static yesno(selector, text, ...args) {
+    if(!selector || !text) throw new Error('Invalid arguments. Must provide a selector and text.');
+
+    let height = null; let width = null; let callback = null; let config = {};
+    for (let i = 0; i < args.length; i++) {
+        if (typeof args[i] === 'number') {
+            if (height === null) {
+                height = args[i];
+            } else {
+                width = args[i];
+            }
+        } else if (typeof args[i] === 'function') {
+            callback = args[i];
+        } else if (typeof args[i] === 'object') {
+            config = args[i];
+        }
+    }
+
+    return new WhiptailJS({
+      text: text,
+      height: height,
+      width: width,
+      selector: selector,
+      items: [],
+      footer: [
+        { label: '&lt;Yes&gt;', id: 'yes', focus: true },
+        { label: '&lt;No&gt;', id: 'no' }
+      ],
+      onSelect: callback,
+      onClose: callback,
+      ...config
+    });
+  }
+  
+  static infobox(selector, text, ...args) {
+    if(!selector || !text) throw new Error('Invalid arguments. Must provide a selector and text.');
+
+    let height = null; let width = null; let callback = null; let config = {};
+    for (let i = 0; i < args.length; i++) {
+        if (typeof args[i] === 'number') {
+            if (height === null) {
+                height = args[i];
+            } else {
+                width = args[i];
+            }
+        } else if (typeof args[i] === 'function') {
+            callback = args[i];
+        } else if (typeof args[i] === 'object') {
+            config = args[i];
+        }
+    }
+
+    const instance = new WhiptailJS({
+      text: text,
+      height: height,
+      width: width,
+      selector: selector,
+      items: [],
+      footer: [],
+      onSelect: callback,
+      onClose: callback,
+      ...config
+    });
+
+    instance.return(); // force callback
+    return instance;
+  }
+
+  // inputbox not compatible
+  // passwordbox not compatible
+  
+  static textbox(...args) {
+    if(!args[1]) throw new Error('Invalid arguments. Must provide a valid file location.');
+
+    try {
+        $.ajax({
+            url: args[1],
+            dataType: 'text',
+            success: function (response) {
+                args[1] = response;
+            },
+            error: function () {
+                throw new Error('Invalid arguments. Must provide a valid file location.');
+            }
+        });
+    } catch (e) {
+        throw new Error('Invalid arguments. Must provide a valid file location.');
+    }
+
+    return WhiptailJS.msgbox(...args);
+  }
+  
+  static menu(selector, text, ...args) {
+    if(!selector || !text) throw new Error('Invalid arguments. Must provide a selector and text.');
+
+    let height = null; let width = null; let items = null; let callback = null; let config = {};
+    for (let i = 0; i < args.length; i++) {
+        if (typeof args[i] === 'number') {
+            if (height === null) {
+                height = args[i];
+            } else {
+                width = args[i];
+            }
+        } else if (typeof args[i] === 'function') {
+            callback = args[i];
+        } else if (typeof args[i] === 'object') {
+            if (Array.isArray(args[i])) {
+                items = args[i];
+            } else {
+                config = args[i];
+            }
+        }
+    }
+
+    return new WhiptailJS({
+      text: text,
+      height: height,
+      width: width,
+      selector: selector,
+      items: items,
+      footer: [
+        { label: '&lt;Ok&gt;', id: 'ok' }
+      ],
+      onSelect: callback,
+      onClose: callback,
+      ...config
+    });
+  }
+
+  // checklist not compatible
+  // radiolist not compatible
+  // gauge not compatible
 }
 
 window.WhiptailJS = WhiptailJS;
